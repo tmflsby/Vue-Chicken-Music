@@ -17,7 +17,7 @@ const routes = [
         component: () => import('../views/singer/singer'),
         children: [
             {
-                path: '/id',
+                path: ':id',
                 component: () => import('../views/singerDetail/singerDetail')
             }
         ]

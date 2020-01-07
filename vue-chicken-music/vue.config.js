@@ -7,9 +7,10 @@ module.exports = {
         host: '0.0.0.0',
         before: app => {
             app.use(bodyParser.urlencoded({extended: true}))
+            // eslint-disable-next-line no-unused-vars
             const querystring = require('querystring')
             //从真实的qq服务地址，通过axios发送一个http请求，将headers中的referer与host修改成qq的
-            app.get('/api/getDiscList', function (req, res) {
+            app.get('/api/getDiscList', (req, res) => {
                 const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
                 axios.get(url, {
                     headers: {
@@ -19,12 +20,13 @@ module.exports = {
                     params: req.query
                 }).then((response) => {
                     res.json(response.data)
-                }).catch((e) => {
-                    console.log(e)
+                }).catch(err => {
+                    // eslint-disable-next-line no-console
+                    console.log(err)
                 })
             })
 
-            app.get('/api/getCdInfo', function (req, res) {
+            app.get('/api/getCdInfo', (req, res) => {
                 const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
                 axios.get(url, {
                     headers: {
@@ -42,12 +44,13 @@ module.exports = {
                         }
                     }
                     res.json(ret)
-                }).catch((e) => {
-                    console.log(e)
+                }).catch(err => {
+                    // eslint-disable-next-line no-console
+                    console.log(err)
                 })
             })
 
-            app.get('/api/lyric', function (req, res) {
+            app.get('/api/lyric', (req, res) => {
                 const url = 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'
 
                 axios.get(url, {
@@ -66,12 +69,13 @@ module.exports = {
                         }
                     }
                     res.json(ret)
-                }).catch((e) => {
-                    console.log(e)
+                }).catch((err) => {
+                    // eslint-disable-next-line no-console
+                    console.log(err)
                 })
             })
 
-            app.post('/api/getPurlUrl', bodyParser.json(), function (req, res) {
+            app.post('/api/getPurlUrl', bodyParser.json(), (req, res) => {
                 const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
                 axios.post(url, req.body, {
                     headers: {
@@ -81,12 +85,13 @@ module.exports = {
                     }
                 }).then((response) => {
                     res.json(response.data)
-                }).catch((e) => {
-                    console.log(e)
+                }).catch(err => {
+                    // eslint-disable-next-line no-console
+                    console.log(err)
                 })
             })
 
-            app.get('/api/search', function (req, res) {
+            app.get('/api/search', (req, res) => {
                 const url = 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp'
                 axios.get(url, {
                     headers: {
@@ -97,6 +102,7 @@ module.exports = {
                 }).then((response) => {
                     res.json(response.data)
                 }).catch((e) => {
+                    // eslint-disable-next-line no-console
                     console.log(e)
                 })
             })
