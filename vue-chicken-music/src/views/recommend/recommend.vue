@@ -63,6 +63,9 @@ export default {
                 if (res.code === ERR_OK) {
                     this.recommends = res.data.slider
                 }
+            }).catch(err => {
+                // eslint-disable-next-line no-console
+                console.log(err)
             })
         },
         _getDiscList() {
@@ -70,6 +73,9 @@ export default {
                 if(res.code === ERR_OK){
                     this.discList = res.data.list
                 }
+            }).catch(err => {
+                // eslint-disable-next-line no-console
+                console.log(err)
             })
         }
     },
