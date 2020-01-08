@@ -6,10 +6,6 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         before: app => {
-            app.use(bodyParser.urlencoded({extended: true}))
-            // eslint-disable-next-line no-unused-vars
-            const querystring = require('querystring')
-            //从真实的qq服务地址，通过axios发送一个http请求，将headers中的referer与host修改成qq的
             app.get('/api/getDiscList', (req, res) => {
                 const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
                 axios.get(url, {

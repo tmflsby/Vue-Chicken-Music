@@ -14,7 +14,7 @@ const jsonp = (url, data, option) => {
     })
 }
 
-const param = (data) => {
+export const param = (data) => {
     let url = ''
     for (let k in data) {
         let value = data[k] !== undefined ? data[k] : ''

@@ -32,5 +32,8 @@ export const getDiscList = () => {
     params: data
   }).then((res) => {
     return Promise.resolve(res.data)
+  }).catch(err => {
+    // eslint-disable-next-line no-console
+    console.log(err)
   })
 }
