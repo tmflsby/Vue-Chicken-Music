@@ -6,17 +6,19 @@
 </template>
 
 <script>
-import { getSingerList } from '@/api/singer'
-import { ERR_OK } from '@/api/config'
 import Singer from '@/common/js/singer'
 import ListView from '@/base/listView/listView'
 import { mapMutations } from 'vuex'
+import { getSingerList } from '@/api/singer'
+import { ERR_OK } from '@/api/config'
+import { playlistMixin } from '@/common/js/mixin'
 
 const HOT_SINGER_LEN = 10
 const HOT_NAME ='热门'
 
 export default {
     name: 'Singer',
+    mixins: [playlistMixin],
     data() {
         return {
             singers: []
@@ -29,6 +31,11 @@ export default {
         this._getSingerList()
     },
     methods:{
+        handlePlaylist(playlist) {
+            const bottom = playlist.length >0 ? '60px' : ''
+            this.$refs.singer.style.bottom = bottom
+            this.$refs.list.refresh()
+        },
         ...mapMutations({ setSinger: 'SET_SINGER' }),
         selectSinger(singer) {
             this.$router.push({
