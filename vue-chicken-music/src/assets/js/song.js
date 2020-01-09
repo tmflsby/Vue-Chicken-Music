@@ -49,7 +49,7 @@ export const createSong = (musicData) => {
     })
 }
 
-const filterSinger = (singer) => {
+export const filterSinger = (singer) => {
     let ret = []
     if (!singer) {
         return ''

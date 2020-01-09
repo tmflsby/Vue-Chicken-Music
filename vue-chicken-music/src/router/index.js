@@ -40,7 +40,13 @@ const routes = [
     },
     {
         path: '/search',
-        component: () => import('@/views/search/search')
+        component: () => import('@/views/search/search'),
+        children: [
+            {
+                path: ':id',
+                component: () => import('@/views/singerDetail/singerDetail')
+            }
+        ]
     }
 ]
 
