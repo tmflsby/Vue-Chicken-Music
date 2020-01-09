@@ -10,7 +10,13 @@ const routes = [
     },
     {
         path: '/recommend',
-        component: () => import('../views/recommend/recommend')
+        component: () => import('../views/recommend/recommend'),
+        children: [
+            {
+                path: ':id',
+                component: () => import('../views/disc/disc')
+            }
+        ]
     },
     {
         path: '/singer',
