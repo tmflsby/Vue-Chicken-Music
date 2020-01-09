@@ -1,12 +1,13 @@
 <template>
     <div class="search-box">
         <i class="icon-search"></i>
-        <input type="text" class="box" :placeholder="placeholder" v-model="query">
+        <input type="text" class="box" :placeholder="placeholder" v-model="query" ref="query">
         <i v-show="query" class="icon-dismiss" @click="clear"></i>
     </div>
 </template>
 
 <script>
+import { debounce } from "@/assets/js/util"
 export default {
     name: 'SearchBox',
     data () {
@@ -15,9 +16,9 @@ export default {
         }
     },
     created() {
-        this.$watch('query',(newQuery) => {
+        this.$watch('query',debounce((newQuery) => {
             this.$emit('query',newQuery)
-        })
+        }, 300))
     },
     props: {
         placeholder: {
@@ -31,6 +32,9 @@ export default {
         },
         setQuery(query) {
             this.query = query
+        },
+        blur() {
+            this.$refs.query.blur()
         }
     }
 }
@@ -53,7 +57,7 @@ export default {
         .box
             flex 1
             margin 0 5px
-            line-height 18px
+            line-height 28px
             background $color-highlight-background
             color $color-text
             font-size $font-size-medium

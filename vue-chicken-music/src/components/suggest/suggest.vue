@@ -1,6 +1,6 @@
 <template>
-    <Scroll class="suggest" :data="result" ref="suggest"
-            :pullup="pullup" @scrollToEnd="searchMore">
+    <Scroll class="suggest" :data="result" ref="suggest" :pullup="pullup" :beforeScroll="beforeScroll"
+            @scrollToEnd="searchMore" @beforeScroll="listScroll">
         <ul class="suggest-list">
             <li @click="selectItem(item)" class="suggest-item" v-for="(item,index) in result" :key="index">
                 <div class="icon">
@@ -12,10 +12,14 @@
             </li>
             <Loading v-show="hasMore" title=""></Loading>
         </ul>
+        <div class="no-result-wrapper" v-show="!hasMore && !result.length">
+            <NoResult title="抱歉，没有搜索结果"></NoResult>
+        </div>
     </Scroll>
 </template>
 
 <script>
+import NoResult from '@/base/noResult/noResult'
 import Scroll from '@/base/scroll/scroll'
 import Loading from '@/base/loading/loading'
 import Singer from '@/assets/js/singer'
@@ -44,12 +48,14 @@ export default {
             page: 1,
             result: [],
             pullup: true,
-            hasMore: true
+            hasMore: true,
+            beforeScroll: true
         }
     },
     components: {
         Scroll,
-        Loading
+        Loading,
+        NoResult
     },
     methods: {
         search() {
@@ -63,9 +69,9 @@ export default {
                 }
             })
         },
-        _checkmore(res){
-            const songs = res.song
-            if(!songs.list.length && (songs.curum + songs.curpage * 20) > songs.totalnum) {
+        _checkmore(data){
+            const song = data.song
+            if (!song.list.length || (song.curnum + (song.curpage - 1) * perpage) >= song.totalnum) {
                 this.hasMore = false
             }
         },
@@ -112,10 +118,13 @@ export default {
                     this.result =this.result.concat(this._genResult(res.data))
                     this._checkmore(res.data)
                 }
+            }).catch(err => {
+                // eslint-disable-next-line no-console
+                console.log(err)
             })
         },
         selectItem(item) {
-            if(Object.is(item.type,TYPE_SINGER)) {
+            if (Object.is(item.type,TYPE_SINGER)) {
                 const singer = new Singer({
                     id: item.singermid,
                     name: item.singername
@@ -124,9 +133,16 @@ export default {
                     path: `/search/${singer.id}`
                 })
                 this.setSinger(singer)
-            }else{
+            } else {
                 this.insertSong(item)
             }
+            this.$emit('select')
+        },
+        listScroll() {
+            this.$emit('listScroll')
+        },
+        refresh() {
+            this.$refs.suggest.refresh()
         },
         ...mapMutations({
             setSinger: 'SET_SINGER'
