@@ -95,14 +95,14 @@
 
 <script>
 import Lyric from 'lyric-parser'
-import animations from 'create-keyframe-animation'
-import { mapGetters ,mapMutations } from 'vuex'
 import ProgressBar from '@/base/progressBar/progressBar'
 import ProgressCircle from '@/base/progressCircle/progressCircle'
 import Scroll from '@/base/scroll/scroll'
-import { prefixStyle } from '@/common/js/dom'
-import { playMode } from '@/common/js/config'
-import { shuffle } from '@/common/js/util'
+import animations from 'create-keyframe-animation'
+import { mapGetters ,mapMutations } from 'vuex'
+import { prefixStyle } from '@/assets/js/dom'
+import { playMode } from '@/assets/js/config'
+import { shuffle } from '@/assets/js/util'
 
 const transform = prefixStyle('transform')
 const transitionDuration = prefixStyle('transitionDuration')

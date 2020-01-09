@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import Singer from '@/common/js/singer'
+import Singer from '@/assets/js/singer'
 import ListView from '@/base/listView/listView'
 import { mapMutations } from 'vuex'
 import { getSingerList } from '@/api/singer'
 import { ERR_OK } from '@/api/config'
-import { playlistMixin } from '@/common/js/mixin'
+import { playlistMixin } from '@/assets/js/mixin'
 
 const HOT_SINGER_LEN = 10
 const HOT_NAME ='热门'

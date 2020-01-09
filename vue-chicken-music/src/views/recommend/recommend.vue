@@ -40,7 +40,7 @@ import Scroll from '@/base/scroll/scroll'
 import Loading from '@/base/loading/loading'
 import { getRecommend, getDiscList } from '@/api/recommend'
 import { ERR_OK } from '@/api/config'
-import { playlistMixin } from '@/common/js/mixin'
+import { playlistMixin } from '@/assets/js/mixin'
 import { mapMutations } from "vuex"
 export default {
     name: 'Recommend',

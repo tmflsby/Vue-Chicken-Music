@@ -28,10 +28,10 @@
 <script>
 import Scroll from '@/base/scroll/scroll'
 import SongList from '@/base/songList/songList'
-import { prefixStyle } from '@/common/js/dom'
+import { prefixStyle } from '@/assets/js/dom'
 import Loading from '@/base/loading/loading'
 import { mapActions } from 'vuex'
-import { playlistMixin } from '@/common/js/mixin'
+import { playlistMixin } from '@/assets/js/mixin'
 
 const RESERVED_HEIGHT = 40
 const transform =prefixStyle('transform')

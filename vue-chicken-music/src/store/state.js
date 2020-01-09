@@ -1,4 +1,4 @@
-import { playMode } from '@/common/js/config'
+import { playMode } from '@/assets/js/config'
 
 const state = {
     singer: {},

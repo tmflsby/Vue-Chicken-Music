@@ -32,7 +32,7 @@
 <script>
 import Scroll from '@/base/scroll/scroll'
 import Loading from '@/base/loading/loading'
-import { getData } from '@/common/js/dom'
+import { getData } from '@/assets/js/dom'
 
 const TITLE_HEIGHT = 30
 const ANCHOR_HEIGHT = 18

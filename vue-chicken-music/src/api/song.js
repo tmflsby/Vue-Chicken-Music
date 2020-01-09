@@ -1,5 +1,5 @@
 import { commonParams } from './config'
-import { getUid } from '@/common/js/uid'
+import { getUid } from '@/assets/js/uid'
 import axios from 'axios'
 import { ERR_OK } from './config'
 

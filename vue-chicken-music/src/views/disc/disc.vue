@@ -1,15 +1,15 @@
 <template>
     <transition name="slide">
-        <music-list :title="title" :bgImage="bgImage" :songs="songs"></music-list>
+        <MusicList :title="title" :bgImage="bgImage" :songs="songs"></MusicList>
     </transition>
 </template>
 
 <script>
-import MusicList from '@/views/musicList/musicList'
+import MusicList from '@/components/musicList/musicList'
 import { mapGetters } from 'vuex'
 import { getSongList } from '@/api/recommend'
 import { ERR_OK } from '@/api/config'
-import { createSong, isValidMusic, processSongsUrl } from '@/common/js/song'
+import { createSong, isValidMusic, processSongsUrl } from '@/assets/js/song'
 export default {
     name: 'Disc',
     data(){

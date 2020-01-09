@@ -1,6 +1,6 @@
 import * as types from './mutationTypes'
-import { playMode } from '@/common/js/config'
-import { shuffle } from '@/common/js/util'
+import { playMode } from '@/assets/js/config'
+import { shuffle } from '@/assets/js/util'
 
 const findIndex = (list, song) => {
     return list.findIndex((item) => {

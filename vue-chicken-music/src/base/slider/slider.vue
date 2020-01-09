@@ -13,7 +13,7 @@
 
 <script>
 import BScroll from '@better-scroll/core'
-import { addClass } from '@/common/js/dom'
+import { addClass } from '@/assets/js/dom'
 export default {
     name: 'Slider',
     data() {

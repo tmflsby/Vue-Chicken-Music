@@ -3,11 +3,11 @@
 </template>
 
 <script>
+import MusicList from '@/components/musicList/musicList'
 import { mapGetters } from 'vuex'
 import { getSingerDetail } from '@/api/singer'
 import { ERR_OK } from '@/api/config'
-import { createSong, isValidMusic, processSongsUrl } from '@/common/js/song'
-import MusicList from '@/views/musicList/musicList'
+import { createSong, isValidMusic, processSongsUrl } from '@/assets/js/song'
 export default {
     name: 'SingerDetail',
     data() {

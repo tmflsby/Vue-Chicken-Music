@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {prefixStyle} from '@/common/js/dom'
+import {prefixStyle} from '@/assets/js/dom'
 
 const progrssBtnWidth = 16
 const transform = prefixStyle('transform')

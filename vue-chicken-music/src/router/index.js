@@ -10,31 +10,31 @@ const routes = [
     },
     {
         path: '/recommend',
-        component: () => import('../views/recommend/recommend'),
+        component: () => import('@/views/recommend/recommend'),
         children: [
             {
                 path: ':id',
-                component: () => import('../views/disc/disc')
+                component: () => import('@/views/disc/disc')
             }
         ]
     },
     {
         path: '/singer',
-        component: () => import('../views/singer/singer'),
+        component: () => import('@/views/singer/singer'),
         children: [
             {
                 path: ':id',
-                component: () => import('../views/singerDetail/singerDetail')
+                component: () => import('@/views/singerDetail/singerDetail')
             }
         ]
     },
     {
         path: '/rank',
-        component: () => import('../views/rank/rank')
+        component: () => import('@/views/rank/rank')
     },
     {
         path: '/search',
-        component: () => import('../views/search/search')
+        component: () => import('@/views/search/search')
     }
 ]
 
