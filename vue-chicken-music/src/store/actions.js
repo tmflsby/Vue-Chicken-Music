@@ -1,7 +1,7 @@
 import * as types from './mutationTypes'
 import { playMode } from '@/assets/js/config'
 import { shuffle } from '@/assets/js/util'
-import { saveSearch, deleteSearch, clearSearch } from '@/assets/js/cache'
+import { saveSearch, deleteSearch, clearSearch, savePlay } from '@/assets/js/cache'
 
 const findIndex = (list, song) => {
     return list.findIndex((item) => {
@@ -9,7 +9,7 @@ const findIndex = (list, song) => {
     })
 }
 
-export const selectPlay = function ({ commit, state }, { list, index }) {
+export const selectPlay = ({ commit, state }, { list, index }) => {
     commit(types.SET_SEQUENCELIST, list)
     if(state.mode === playMode.random) {
         let randomList = shuffle(list)
@@ -80,10 +80,43 @@ export const saveSearchHistory = ({commit}, query) => {
     commit(types.SET_SEARCH_HISTORY, saveSearch(query))
 }
 
-export const deleteSearchHistory = ( {commit}, query) => {
+export const deleteSearchHistory = ({commit}, query) => {
     commit(types.SET_SEARCH_HISTORY, deleteSearch(query))
 }
 
-export const clearSearchHistory = ( {commit}) => {
+export const clearSearchHistory = ({commit}) => {
     commit(types.SET_SEARCH_HISTORY, clearSearch())
+}
+
+export const deleteSong = ({commit, state}, song) => {
+    let playlist = state.playlist.slice()
+    let sequenceList = state.sequenceList.slice()
+    let currentIndex = state.currentIndex
+    let pIndex = findIndex(playlist, song)
+    playlist.splice(pIndex, 1)
+    let sIndex = findIndex(sequenceList, song)
+    sequenceList.splice(sIndex, 1)
+    if (currentIndex > pIndex || currentIndex === playlist.length) {
+        currentIndex--
+    }
+
+    commit(types.SET_PLAYLIST, playlist)
+    commit(types.SET_SEQUENCELIST, sequenceList)
+    commit(types.SET_CURRENTINDEX, currentIndex)
+
+    const playingState = playlist.length > 0
+    commit(types.SET_PLAYING_STATE, playingState)
+
+}
+
+export const deleteSongList = ({commit} ) => {
+    commit(types.SET_PLAYLIST, [])
+    commit(types.SET_SEQUENCELIST, [])
+    commit(types.SET_CURRENTINDEX, -1)
+    commit(types.SET_PLAYING_STATE, false)
+}
+
+// eslint-disable-next-line no-unused-vars
+export const savePlayHistory = ({commit, state}, song) => {
+    commit(types.SET_PLAY_HISTORY, savePlay(song))
 }

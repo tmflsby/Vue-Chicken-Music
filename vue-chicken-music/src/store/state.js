@@ -1,5 +1,5 @@
 import { playMode } from '@/assets/js/config'
-import { loadSearch } from "@/assets/js/cache"
+import { loadSearch, loadPlay } from "@/assets/js/cache"
 
 const state = {
     singer: {},
@@ -11,7 +11,8 @@ const state = {
     currentIndex: -1,
     disc: {},
     toplist: {},
-    searchHistory: loadSearch()
+    searchHistory: loadSearch(),
+    playHistory: loadPlay()
 }
 
 export default state

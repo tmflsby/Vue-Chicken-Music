@@ -82,11 +82,12 @@
                         <i @click.stop="togglePlaying" class="icon-mini" :class="miniIcon"></i>
                     </ProgressCircle>
                 </div>
-                <div class="control">
+                <div class="control" @click.stop="showPlayList">
                     <i class="icon-playlist"></i>
                 </div>
             </div>
         </transition>
+        <PlayList ref="playlist"></PlayList>
         <audio ref="audio" :src="currentSong.url" @canplay="ready" @error="error"
                @timeupdate="updateTime" @ended="end">
         </audio>
@@ -95,20 +96,22 @@
 
 <script>
 import Lyric from 'lyric-parser'
+import PlayList from '@/components/playList/playList'
 import ProgressBar from '@/base/progressBar/progressBar'
 import ProgressCircle from '@/base/progressCircle/progressCircle'
 import Scroll from '@/base/scroll/scroll'
 import animations from 'create-keyframe-animation'
-import { mapGetters ,mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { prefixStyle } from '@/assets/js/dom'
 import { playMode } from '@/assets/js/config'
-import { shuffle } from '@/assets/js/util'
+import { playerMixin } from '@/assets/js/mixin'
 
 const transform = prefixStyle('transform')
 const transitionDuration = prefixStyle('transitionDuration')
 
 export default{
     name: 'Player',
+    mixins: [playerMixin],
     data () {
         return {
             songReady: false,
@@ -123,7 +126,8 @@ export default{
     components: {
         ProgressBar,
         ProgressCircle,
-        Scroll
+        Scroll,
+        PlayList
     },
     computed: {
         cdCls() {
@@ -138,20 +142,13 @@ export default{
         disableCls() {
             return this.songReady ? '' : 'disable'
         },
-        iconMode() {
-            return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random'
-        },
         percent() {
             return this.currentTime / this.currentSong.duration
         },
         ...mapGetters([
             'fullScreen',
-            'playlist',
-            'currentSong',
             'playing',
             "currentIndex",
-            "mode",
-            "sequenceList"
         ])
     },
     created () {
@@ -284,6 +281,7 @@ export default{
         },
         ready () {
             this.songReady = true
+            this.savePlayHistory(this.currentSong)
         },
         error () {
             this.songReady = true
@@ -314,24 +312,6 @@ export default{
                 len++
             }
             return num
-        },
-        changeMode() {
-            const mode = (this.mode + 1) % 3
-            this.setMode(mode)
-            let list = null
-            if (mode === playMode.random) {
-                list = shuffle(this.sequenceList)
-            } else {
-                list = this.sequenceList
-            }
-            this.resetCurrentIndex(list)
-            this.setPlayList(list)
-        },
-        resetCurrentIndex(list) {
-            let index = list.findIndex((item) => {
-                return item.id === this.currentSong.id
-            })
-            this.setCurrentIndex(index)
         },
         getLyric() {
             this.currentSong.getLyric().then((lyric) => {
@@ -417,16 +397,21 @@ export default{
             this.$refs.middleL.style[transitionDuration] = `${time}ms`
             this.touch.initiated = false
         },
+        showPlayList() {
+            this.$refs.playlist.show()
+        },
         ...mapMutations({
-            setFullScreen: 'SET_FULLSCREEN',
-            setPlayingState: 'SET_PLAYING_STATE',
-            setCurrentIndex: 'SET_CURRENTINDEX',
-            setMode: 'SET_MODE',
-            setPlayList: 'SET_PLAYLIST'
-        })
+            setFullScreen: 'SET_FULLSCREEN'
+        }),
+        ...mapActions([
+            'savePlayHistory'
+        ])
     },
     watch: {
         currentSong (newSong,oldSong) {
+            if(!newSong.id) {
+                return
+            }
             if( newSong.id === oldSong.id) {
                 return
             }
