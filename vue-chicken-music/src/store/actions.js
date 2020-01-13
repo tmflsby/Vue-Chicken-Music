@@ -1,7 +1,7 @@
 import * as types from './mutationTypes'
 import { playMode } from '@/assets/js/config'
 import { shuffle } from '@/assets/js/util'
-import { saveSearch, deleteSearch, clearSearch, savePlay } from '@/assets/js/cache'
+import { saveSearch, deleteSearch, clearSearch, savePlay, saveFavorite, deleteFavorite } from '@/assets/js/cache'
 
 const findIndex = (list, song) => {
     return list.findIndex((item) => {
@@ -119,4 +119,12 @@ export const deleteSongList = ({commit} ) => {
 // eslint-disable-next-line no-unused-vars
 export const savePlayHistory = ({commit, state}, song) => {
     commit(types.SET_PLAY_HISTORY, savePlay(song))
+}
+
+export const saveFavoriteList = ({commit}, song) => {
+    commit(types.SET_FAVORITE_LIST, saveFavorite(song))
+}
+
+export const deleteFavoriteList = ({commit}, song) => {
+    commit(types.SET_FAVORITE_LIST, deleteFavorite(song))
 }
