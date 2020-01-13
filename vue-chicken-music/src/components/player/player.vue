@@ -88,7 +88,7 @@
             </div>
         </transition>
         <PlayList ref="playlist"></PlayList>
-        <audio ref="audio" :src="currentSong.url" @canplay="ready" @error="error"
+        <audio ref="audio" :src="currentSong.url" @play="ready" @error="error"
                @timeupdate="updateTime" @ended="end">
         </audio>
     </div>
@@ -235,6 +235,7 @@ export default{
             }
             if (this.playlist.length === 1) {
                 this.loop()
+                return
             } else {
                 let index = this.currentIndex - 1
                 if (index === -1) {
@@ -253,6 +254,7 @@ export default{
             }
             if (this.playlist.length === 1){
                 this.loop()
+                return
             } else {
                 let index = this.currentIndex + 1
                 if (index === this.playlist.length) {
@@ -266,7 +268,7 @@ export default{
             this.songReady = false
         },
         end () {
-            if(this.mode == playMode.loop) {
+            if(this.mode === playMode.loop) {
                 this.loop()
             }else {
                 this.next()
@@ -315,6 +317,9 @@ export default{
         },
         getLyric() {
             this.currentSong.getLyric().then((lyric) => {
+                if(this.currentSong.lyric !== lyric) {
+                    return
+                }
                 this.currentLyric = new Lyric(lyric, this.hanleLyric)
                 if(this.playing){
                     this.currentLyric.play()
@@ -327,10 +332,10 @@ export default{
         },
         hanleLyric({lineNum, txt}) {
             this.currentLineNum = lineNum
-            if(lineNum > 5){
+            if (lineNum > 5) {
                 let lineEL = this.$refs.lyricLine[lineNum-5]
                 this.$refs.lyricList.scrollToElement(lineEL,1000)
-            }else{
+            } else {
                 this.$refs.lyricList.scrollTo(0, 0, 1000)
             }
             this.playingLyric = txt
@@ -423,8 +428,12 @@ export default{
             const audio = this.$refs.audio
             if(this.currentLyric) {
                 this.currentLyric.stop()
+                this.currentTime = 0
+                this.playingLyric = ''
+                this.currentLineNum = 0
             }
-            setTimeout(()=> {
+            clearTimeout(this.timer)
+            this.timer = setTimeout(()=> {
                 newPlaying ? audio.play() : audio.pause()
                 this.getLyric()
             },1000)

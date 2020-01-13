@@ -2,7 +2,7 @@
     <Scroll class="suggest" :data="result" ref="suggest" :pullup="pullup" :beforeScroll="beforeScroll"
             @scrollToEnd="searchMore" @beforeScroll="listScroll">
         <ul class="suggest-list">
-            <li @click="selectItem(item)" class="suggest-item" v-for="(item,index) in result" :key="index">
+            <li @click="selectItem(item)" class="suggest-item" v-for="(item, index) in result" :key="index">
                 <div class="icon">
                     <i :class="getIconCls(item)"></i>
                 </div>
@@ -124,6 +124,8 @@ export default {
             })
         },
         selectItem(item) {
+            // eslint-disable-next-line no-console
+            // console.log(item)  //=====>url is undefined
             if (Object.is(item.type,TYPE_SINGER)) {
                 const singer = new Singer({
                     id: item.singermid,
