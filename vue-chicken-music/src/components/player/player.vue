@@ -413,7 +413,7 @@ export default{
         ])
     },
     watch: {
-        currentSong (newSong,oldSong) {
+        currentSong (newSong, oldSong) {
             if(!newSong.id) {
                 return
             }
