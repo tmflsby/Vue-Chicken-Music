@@ -33,9 +33,26 @@ export default class Song {
                 console.log(err)
             })
         })
-    }
+  }
 }
 
+/**
+ * @param {Array} singer
+ * */
+const filterSinger = (singer) => {
+    let ret = []
+    if (!singer) {
+        return ''
+    }
+    singer.forEach((s) => {
+        ret.push(s.name)
+    })
+    return ret.join('/')
+}
+
+/**
+ * @param {Object} musicData
+ * */
 export const createSong = (musicData) => {
     return new Song({
         id: musicData.songid,
@@ -49,21 +66,16 @@ export const createSong = (musicData) => {
     })
 }
 
-export const filterSinger = (singer) => {
-    let ret = []
-    if (!singer) {
-        return ''
-    }
-    singer.forEach((s) => {
-        ret.push(s.name)
-    })
-    return ret.join('/')
-}
-
+/**
+ * @param {Object} musicData
+ * */
 export const isValidMusic = (musicData) => {
     return musicData.songid && musicData.albummid && (!musicData.pay || musicData.pay.payalbumprice === 0)
 }
 
+/**
+ * @param {Object} songs
+ * */
 export const processSongsUrl = (songs) => {
     if (!songs.length) {
         return Promise.resolve(songs)
@@ -83,3 +95,4 @@ export const processSongsUrl = (songs) => {
         console.log(err)
     })
 }
+

@@ -1,6 +1,9 @@
 import jsonp from '@/assets/js/jsonp'
 import { commonParams, options } from './config'
 
+/**
+ * 获取歌手页 歌手列表数据
+ * */
 export const getSingerList = () => {
     const url = 'https://c.y.qq.com/v8/fcg-bin/v8.fcg'
 
@@ -18,6 +21,9 @@ export const getSingerList = () => {
     return jsonp(url, data, options)
 }
 
+/**
+ * 获取歌手页 歌手详情数据
+ * */
 export const getSingerDetail = (singerId) => {
     const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_track_cp.fcg'
 

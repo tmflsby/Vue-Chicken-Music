@@ -85,12 +85,14 @@ export default {
             if (!this.$refs.wrapper) {
                 return
             }
+
             // better-scroll的初始化
             this.scroll = new BScroll(this.$refs.wrapper, {
                 probeType: this.probeType,
                 click: this.click,
                 scrollX: this.scrollX
             })
+
             // 是否派发滚动事件
             if (this.listenScroll) {
                 let me = this
@@ -98,6 +100,7 @@ export default {
                     me.$emit('scroll', pos)
                 })
             }
+
             // 是否派发滚动到底部事件，用于上拉加载
             if(this.pullup) {
                 this.scroll.on('scrollEnd', ()=>{
@@ -107,6 +110,7 @@ export default {
                     }
                 })
             }
+
             // 是否派发顶部下拉事件，用于下拉刷新
             if (this.pulldown) {
                 this.scroll.on('touchend', (pos) => {
@@ -116,6 +120,7 @@ export default {
                     }
                 })
             }
+
             // 是否派发列表滚动开始的事件
             if(this.beforeScroll) {
                 this.scroll.on('beforeScrollStart', ()=> {

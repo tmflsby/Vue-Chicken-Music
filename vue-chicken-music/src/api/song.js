@@ -5,6 +5,9 @@ import { ERR_OK } from './config'
 
 const debug = process.env.NODE_ENV !== 'production'
 
+/**
+ * 获取歌词数据
+ * */
 export const getLyric = (mid) => {
     const url = debug ? '/api/lyric' : 'http://ustbhuangyi.com/music/api/lyric'
 
@@ -28,6 +31,29 @@ export const getLyric = (mid) => {
     })
 }
 
+/**
+ * @param {Array} mids
+ * @param {Array} types
+ * */
+const genUrlMid = (mids, types) => {
+  const guid = getUid()
+  return {
+    module: 'vkey.GetVkeyServer',
+    method: 'CgiGetVkey',
+    param: {
+      guid,
+      songmid: mids,
+      songtype: types,
+      uin: '0',
+      loginflag: 0,
+      platform: '23'
+    }
+  }
+}
+
+/**
+ * 获取歌曲URL
+ * */
 export function getSongsUrl (songs) {
     const url = debug ? '/api/getPurlUrl' : 'http://ustbhuangyi.com/music/api/getPurlUrl'
 
@@ -94,20 +120,4 @@ export function getSongsUrl (songs) {
 
         request()
     })
-}
-
-function genUrlMid (mids, types) {
-    const guid = getUid()
-    return {
-        module: 'vkey.GetVkeyServer',
-        method: 'CgiGetVkey',
-        param: {
-            guid,
-            songmid: mids,
-            songtype: types,
-            uin: '0',
-            loginflag: 0,
-            platform: '23'
-        }
-    }
 }

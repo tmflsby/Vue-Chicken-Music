@@ -1,7 +1,8 @@
 <template>
-    <div class="player" v-show="playlist.length>0">
-        <transition name="normal" @enter = "enter" @after-enter = "afterEnter"
-                    @leave = "leave" @after-leave= "afterLeave">
+    <div class="player" v-show="playlist.length > 0">
+        <transition name="normal" @enter="enter" @after-enter="afterEnter"
+                    @leave = "leave" @after-leave= "afterLeave"
+        >
             <div class="normal-player" v-show="fullScreen">
                 <div class="background">
                     <img  width="100%" height="100%" :src="currentSong.image">
@@ -14,7 +15,8 @@
                     <h2 class="subtitle" v-html="currentSong.singer"></h2>
                 </div>
                 <div class="middle" ref="cdWrapper" @touchstart.prevent="middleTouchStart"
-                     @touchmove.prevent="middleTouchMove" @touchend="middleTouchEnd">
+                     @touchmove.prevent="middleTouchMove" @touchend="middleTouchEnd"
+                >
                     <div class="middle-l" ref="middleL">
                         <div class="cd-wrapper">
                             <div class="cd">
@@ -28,8 +30,11 @@
                     <Scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
                         <div class="lyric-wrapper">
                             <div v-if="currentLyric">
-                                <p ref="lyricLine" class="text" v-for="(line, index) in currentLyric.lines" :key="index"
-                                   :class="{'current':currentLineNum === index}">{{line.txt}}</p>
+                                <p ref="lyricLine" class="text" v-for="(line, index) in currentLyric.lines"
+                                   :key="index" :class="{'current':currentLineNum === index}"
+                                >
+                                  {{line.txt}}
+                                </p>
                             </div>
                         </div>
                     </Scroll>
@@ -88,8 +93,9 @@
             </div>
         </transition>
         <PlayList ref="playlist"></PlayList>
-        <audio ref="audio" :src="currentSong.url" @play="ready" @error="error"
-               @timeupdate="updateTime" @ended="end">
+        <audio ref="audio" :src="currentSong.url" @play="ready"
+               @error="error" @timeupdate="updateTime" @ended="end"
+        >
         </audio>
     </div>
 </template>

@@ -1,6 +1,9 @@
 import jsonp from '@/assets/js/jsonp'
 import { commonParams, options } from './config'
 
+/**
+ * 获取排行页 榜单类型数据
+ * */
 export const getTopList = () => {
     const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg'
 
@@ -12,6 +15,9 @@ export const getTopList = () => {
     return jsonp(url, data, options)
 }
 
+/**
+ * 获取排行页 相应榜单歌曲数据
+ * */
 export const getMusicList = (topid) => {
     const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg'
 

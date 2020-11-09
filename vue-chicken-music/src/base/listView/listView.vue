@@ -1,22 +1,28 @@
 <template>
-    <Scroll @scroll="scroll" :listen-scroll="listenScroll" :probe-type="probeType"
-            :data="data" class="listview" ref="listview">
+    <Scroll @scroll="scroll" :listen-scroll="listenScroll"
+            :probe-type="probeType" :data="data"
+            class="listview" ref="listview"
+    >
         <ul>
             <li v-for="group in data" class="list-group" ref="listGroup" :key="group.title">
                 <h2 class="list-group-title">{{group.title}}</h2>
-                <uL>
+                <ul>
                     <li @click="selectItem(item)" v-for="item in group.items" :key="item.name" class="list-group-item">
-                        <img class="avatar" v-lazy="item.avatar">
+                        <img class="avatar" v-lazy="item.avatar" alt="" src="">
                         <span class="name">{{item.name}}</span>
                     </li>
-                </uL>
+                </ul>
             </li>
         </ul>
-        <div class="list-shortcut" @touchstart.stop.prevent="onShortcutTouchStart"
-             @touchmove.stop.prevent="onShortcutTouchMove" @touchend.stop>
+        <div class="list-shortcut" @touchend.stop
+             @touchstart.stop.prevent="onShortcutTouchStart"
+             @touchmove.stop.prevent="onShortcutTouchMove"
+        >
             <ul>
                 <li v-for="(item, index) in shortcutList" :key="item" :data-index="index"
-                    class="item" :class="{'current':currentIndex===index}">{{item}}
+                    class="item" :class="{'current':currentIndex===index}"
+                >
+                    {{item}}
                 </li>
             </ul>
         </div>
@@ -212,7 +218,7 @@ export default {
                     color: $color-theme
         .list-fixed
             position: absolute
-            top: 0
+            top: -2px
             left: 0
             width: 100%
             .fixed-title

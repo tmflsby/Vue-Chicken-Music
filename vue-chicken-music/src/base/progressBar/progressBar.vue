@@ -2,8 +2,11 @@
     <div class="progress-bar" ref="progressBar" @click="progressClick">
         <div class="bar-inner">
             <div class="progress" ref="progress"></div>
-            <div class="progress-btn-wrapper" ref="progressBtn" @touchstart.prevent="progressTouchStart"
-                 @touchmove.prevent="progressTouchMove" @touchend="progressTouchEnd">
+            <div class="progress-btn-wrapper" ref="progressBtn"
+                 @touchstart.prevent="progressTouchStart"
+                 @touchmove.prevent="progressTouchMove"
+                 @touchend="progressTouchEnd"
+            >
                 <div class="progress-btn"></div>
             </div>
         </div>
@@ -41,8 +44,7 @@ export default {
             const offsetWidth =Math.min(this.$refs.progressBar.clientWidth - progrssBtnWidth, Math.max(0,this.touch.left + deltaX))
             this._offset(offsetWidth)
         },
-        // eslint-disable-next-line no-unused-vars
-        progressTouchEnd(e) {
+        progressTouchEnd() {
             this.initiated = false
             this._triggerPercent()
         },

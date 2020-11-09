@@ -17,8 +17,9 @@
                         <SongList :songs="favoriteList" @select="selectSong"></SongList>
                     </div>
                 </Scroll>
-                <Scroll  ref="playList" v-if="currentIndex===1" class="list-scroll"
-                         :data="playHistory">
+                <Scroll  ref="playList" v-if="currentIndex===1"
+                         class="list-scroll" :data="playHistory"
+                >
                     <div class="list-inner">
                         <SongList :songs="playHistory" @select="selectSong"></SongList>
                     </div>

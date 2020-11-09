@@ -32,7 +32,7 @@ export default {
     },
     methods:{
         handlePlaylist(playlist) {
-            const bottom = playlist.length >0 ? '60px' : ''
+            const bottom = playlist.length > 0 ? '60px' : ''
             this.$refs.singer.style.bottom = bottom
             this.$refs.list.refresh()
         },

@@ -1,11 +1,24 @@
+/**
+ * @param {String} el
+ * @param {String} className
+ * */
 export const addClass = (el, className) => {
     el.classList.add(className)
 }
 
+/**
+ * @param {String} el
+ * @param {String} className
+ * */
 export const hasClass = (el, className) => {
     el.classList.add(className)
 }
 
+/**
+ * @param {String} el
+ * @param {String} name
+ * @param {String} val
+ * */
 export const getData = (el, name, val) => {
     const prefix = 'data-'
     if (val) {
@@ -34,6 +47,9 @@ let vendor = (() => {
     return false
 })()
 
+/**
+ * @param {String} style
+ * */
 export const prefixStyle = (style) => {
     if (vendor === false) {
         return false

@@ -5,7 +5,8 @@
         </div>
         <div class="dots">
             <span class="dot" v-for="(item,index) in dots" :key="index"
-                :class="{active: currentPageIndex === index}">
+                  :class="{active: currentPageIndex === index}"
+            >
             </span>
         </div>
     </div>
@@ -60,6 +61,7 @@ export default {
 
             let width = 0
             let sliderWidth = this.$refs.slider.clientWidth
+
             for (let i = 0; i < this.children.length; i++) {
                 let child = this.children[i]
                 addClass(child, 'slider-item')
@@ -67,9 +69,11 @@ export default {
                 child.style.width = sliderWidth + 'px'
                 width += sliderWidth
             }
+
             if (this.loop && !isResize) {
                 width += 2 * sliderWidth
             }
+
             this.$refs.sliderGroup.style.width = width + 'px'
         },
         _initDots() {

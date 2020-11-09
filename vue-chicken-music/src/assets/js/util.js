@@ -1,10 +1,17 @@
+/**
+ * @param {Number} min
+ * @param {Number} max
+ * */
 const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+/**
+ * @param {Array} arr
+ * */
 export const shuffle = (arr) => {
     let _arr = arr.slice()
-    for(let i = 0; i < _arr.length; i++){
+    for (let i = 0; i < _arr.length; i++) {
         let j = getRandomInt(0, i)
         let t = _arr[i]
         _arr[i] = _arr[j]
@@ -13,14 +20,18 @@ export const shuffle = (arr) => {
     return _arr
 }
 
+/**
+ * @param {Function} func
+ * @param {Number} delay
+ * */
 export const debounce = (func, delay) => {
     let timer
     return function(...args) {
-        if(timer) {
+        if (timer) {
             clearTimeout(timer)
         }
         timer = setTimeout( ()=> {
             func.apply(this, args)
-        },delay)
+        }, delay)
     }
 }

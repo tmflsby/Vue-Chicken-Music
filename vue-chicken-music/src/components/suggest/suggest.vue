@@ -1,6 +1,8 @@
 <template>
-    <Scroll class="suggest" :data="result" ref="suggest" :pullup="pullup" :beforeScroll="beforeScroll"
-            @scrollToEnd="searchMore" @beforeScroll="listScroll">
+    <Scroll class="suggest" :data="result" ref="suggest"
+            :pullup="pullup" :beforeScroll="beforeScroll"
+            @scrollToEnd="searchMore" @beforeScroll="listScroll"
+    >
         <ul class="suggest-list">
             <li @click="selectItem(item)" class="suggest-item" v-for="(item, index) in result" :key="index">
                 <div class="icon">

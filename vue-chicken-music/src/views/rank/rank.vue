@@ -1,14 +1,14 @@
 <template>
     <div class="rank" ref="rank">
-        <scroll class="toplist" ref="toplist" :data="topList">
+        <Scroll class="toplist" ref="toplist" :data="topList">
             <ul>
                 <li class="item" v-for="(item,index) of topList" :key="index" @click="seletToplist(item)">
                     <div class="icon">
-                        <img v-lazy="item.picUrl" width="100" height="100">
+                        <img v-lazy="item.picUrl" width="100" height="100" alt="" src="">
                     </div>
                     <ul class="songlist">
                         <li class="song" v-for="(song,index) of item.songList" :key="index">
-                            <span>{{index + 1}}</span>
+                            <span>{{index + 1}}.</span>
                             <span>{{song.songname}}--{{song.singername}}</span>
                         </li>
                     </ul>
@@ -17,7 +17,7 @@
             <div class="loading-container" v-if="!topList.length">
                 <loading></loading>
             </div>
-        </scroll>
+        </Scroll>
         <router-view></router-view>
     </div>
 </template>
@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         handlePlaylist(playlist) {
-            const bottom = playlist.length >0 ? '60px' : ''
+            const bottom = playlist.length > 0 ? '60px' : ''
             this.$refs.rank.style.bottom = bottom
             this.$refs.toplist.refresh()
         },
@@ -61,10 +61,10 @@ export default {
             this.$router.push({
                 path: `/rank/${item.id}`
             })
-            this.SET_TOPLIST(item)
+            this.setTopList(item)
         },
         ...mapMutations({
-            SET_TOPLIST:'SET_TOPLIST'
+            setTopList:'SET_TOPLIST'
         })
     }
 }
@@ -106,6 +106,8 @@ export default {
                     .song
                         no-wrap()
                         line-height 26px
+                        span:first-child
+                            margin-right: 5px
             .loading-container
                 position absolute
                 width 100%

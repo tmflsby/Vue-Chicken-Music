@@ -1,3 +1,6 @@
+/**
+ * API 公共参数
+ * */
 export const commonParams = {
   g_tk: 1928093487,
   inCharset: 'utf-8',
@@ -6,9 +9,15 @@ export const commonParams = {
   format: 'jsonp'
 }
 
+/**
+ * jsonp
+ * */
 export const options = {
   param: 'jsonpCallback',
   prefix: 'jp'
 }
 
+/**
+ * 常量
+ * */
 export const ERR_OK = 0

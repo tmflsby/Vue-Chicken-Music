@@ -4,6 +4,9 @@ import axios from 'axios'
 
 const debug = process.env.NODE_ENV !== 'production'
 
+/**
+ * 获取推荐页 轮播图数据
+ * */
 export const getRecommend = () => {
   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
@@ -16,6 +19,9 @@ export const getRecommend = () => {
   return jsonp(url, data, options)
 }
 
+/**
+ * 获取推荐页 热门歌单推荐数据
+ * */
 export const getDiscList = () => {
   const url = '/api/getDiscList'
   const data = Object.assign({}, commonParams, {
@@ -40,6 +46,9 @@ export const getDiscList = () => {
   })
 }
 
+/**
+ * 获取推荐页 相应热门歌单歌曲数据
+ * */
 export const getSongList = (disstid) => {
   const url = debug ? '/api/getCdInfo' : 'http://ustbhuangyi.com/music/api/getCdInfo'
 

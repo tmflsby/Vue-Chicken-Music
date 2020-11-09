@@ -116,8 +116,7 @@ export const deleteSongList = ({commit} ) => {
     commit(types.SET_PLAYING_STATE, false)
 }
 
-// eslint-disable-next-line no-unused-vars
-export const savePlayHistory = ({commit, state}, song) => {
+export const savePlayHistory = ({commit}, song) => {
     commit(types.SET_PLAY_HISTORY, savePlay(song))
 }
 

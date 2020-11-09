@@ -15,7 +15,8 @@
         </div>
         <div class="bg-layer" ref="layer"></div>
         <Scroll :data="songs" class="list" ref="list" :probe-type="probeType"
-                :listen-scroll="listenScroll" @scroll="scroll">
+                :listen-scroll="listenScroll" @scroll="scroll"
+        >
             <div class="song-list-wrapper">
                 <SongList :songs="songs" @select="selectItem" :rank="rank"></SongList>
             </div>
@@ -81,7 +82,7 @@ export default {
     },
     methods:{
         handlePlaylist(playlist) {
-            const bottom = playlist.length >0 ? '60px' : ''
+            const bottom = playlist.length > 0 ? '60px' : ''
             this.$refs.list.$el.style.bottom = bottom
             this.$refs.list.refresh()
         },
@@ -109,12 +110,12 @@ export default {
     },
     watch: {
         scrollY(newY) {
-            let translateY = Math.max(this.minTranslateY,newY)
+            let translateY = Math.max(this.minTranslateY, newY)
             let zIndex = 0
             let scale = 1
             let blur = 0
-            this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0`
-            const percent = Math.abs(newY/this.imageHeight)
+            this.$refs.layer.style[transform] = `translate3d(0, ${translateY}px, 0)`
+            const percent = Math.abs(newY / this.imageHeight)
             if (newY > 0) {
                 scale = 1 + percent
                 zIndex = 10
@@ -122,7 +123,7 @@ export default {
                 blur = Math.min(20 * percent, 20)
             }
             this.$refs.filter.style[backdrop] = `blur(${blur}px)`
-            if (newY< this.minTranslateY) {
+            if (newY < this.minTranslateY) {
                 zIndex =10
                 this.$refs.bgImage.style.paddingTop = 0
                 this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`

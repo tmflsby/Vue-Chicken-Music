@@ -22,6 +22,22 @@ module.exports = {
                 })
             })
 
+            app.get('/api/getRecommend', (req, res) => {
+                const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+                axios.get(url, {
+                    headers: {
+                      referer: 'https://u.y.qq.com/',
+                      host: 'u.y.qq.com'
+                    },
+                    params: req.query
+                }).then((response) => {
+                    res.json(response.data)
+                }).catch(err => {
+                    // eslint-disable-next-line no-console
+                    console.log(err)
+                })
+            })
+
             app.get('/api/getCdInfo', (req, res) => {
                 const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
                 axios.get(url, {

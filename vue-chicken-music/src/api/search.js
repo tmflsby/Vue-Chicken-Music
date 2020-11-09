@@ -4,6 +4,9 @@ import axios from 'axios'
 
 const debug = process.env.NODE_ENV !== 'production'
 
+/**
+ * 获取搜索页 热门搜索数据
+ * */
 export const getHotSearch = () => {
     const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
 
@@ -16,6 +19,9 @@ export const getHotSearch = () => {
     return jsonp(url, data, options)
 }
 
+/**
+ * 获取搜索页 搜索数据
+ * */
 export const search = (query, page, zhida, perpage) => {
     const url = debug ? '/api/search' : 'http://ustbhuangyi.com/music/api/search'
 

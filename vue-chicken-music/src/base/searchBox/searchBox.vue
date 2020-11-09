@@ -53,7 +53,7 @@ export default {
         border-radius 6px
         .icon-search
             font-size 24px
-            color $color-background
+            color $color-dialog-background
         .box
             flex 1
             margin 0 5px
@@ -63,7 +63,8 @@ export default {
             font-size $font-size-medium
             &::placeholder
                 color $color-text-d
+                text-indent 10px
         .icon-dismiss
             font-size 16px
-            color $color-background
+            color $color-dialog-background
 </style>
